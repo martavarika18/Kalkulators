@@ -1,4 +1,7 @@
-import distutils 
+from ast import operator
+import distutils
+from distutils import command
+#import math 
 import numbers
 from tkinter import*
 from math import*
@@ -39,14 +42,34 @@ def Equals():
         result=num1*num2
     elif mathOp=='%':
         result=num1*0.01*num2
-    elif mathOp=='+/-':
-        result=num1*(-1)
+    elif mathOp=='^':
+        result=num1**num2
     else:
         result=0
     e.delete(0,END)
     e.insert(0,str(result))
     return 0
 
+
+def Sqrt():
+    global operator
+    global num1
+    global mathOp
+    mathOp=command
+    num1=int(e.get())
+    num1=sqrt(num1)
+    e.delete(0,END)
+    e.insert(0,num1)
+    
+def Log():
+    global operator
+    global num1
+    global mathOp
+    mathOp=command
+    num1=int(e.get())
+    num1=log(num1,10)
+    e.delete(0,END)
+    e.insert(0,num1)
 
 def Clear():
     e.delete(0,END)
@@ -56,7 +79,9 @@ def Clear():
 
 
 
-e=Entry(mansLogs,width=15,bd=20,font=('Arial Black',20))
+
+
+e=Entry(mansLogs,width=15,bd=20,bg='light blue',font=('Arial Black',20))
 
 btn0=Button(mansLogs,text='0',padx='40',pady='20',bd=10,bg='pink', command=lambda:btnClick(0))#funkcijai padod parametrus
 btn1=Button(mansLogs,text='1',padx='40',pady='20',bd=10,bg='pink', command=lambda:btnClick(1))
@@ -73,13 +98,13 @@ btn11=Button(mansLogs,text='*',padx='40',pady='20', bd=10,bg='pink',command=lamb
 btn12=Button(mansLogs,text='-',padx='40',pady='20',bd=10,bg='pink', command=lambda:btnCommand('-'))
 btn13=Button(mansLogs,text='+',padx='40',pady='20', bd=10,bg='pink',command=lambda:btnCommand('+'))
 btn18=Button(mansLogs,text='%',padx='40',pady='20', bd=10,bg='pink',command=lambda:btnCommand('%'))
-btn19=Button(mansLogs,text='+/-',padx='40',pady='20', bd=10,bg='pink',command=lambda:btnCommand('+/-'))
-btn20=Button(mansLogs,text='()',padx='40',pady='20', bd=10,bg='pink',command=lambda:btnCommand('()'))
+btn19=Button(mansLogs,text='sqrt',padx='40',pady='20', bd=10,bg='pink',command=lambda:Sqrt())
+btn20=Button(mansLogs,text='^',padx='40',pady='20', bd=10,bg='pink',command=lambda:btnCommand('^'))
 
 btn14=Button(mansLogs,text='=',padx='40',pady='20', bd=10,bg='pink',command=lambda:Equals())
 btn15=Button(mansLogs,text='0',padx='40',pady='20', bd=10,bg='pink',command=lambda:btnClick(0))
 btn16=Button(mansLogs,text='C',padx='40',pady='20', bd=10,bg='pink',command=lambda:Clear())
-btn17=Button(mansLogs,text='.',padx='40',pady='20',bd=10,bg='pink')
+btn17=Button(mansLogs,text='log',padx='40',pady='20',bd=10,bg='pink',command=lambda:Log())
 
 e.grid(row=0,column=0,columnspan=4)
 
